@@ -26,8 +26,8 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
   const [time, setTime] = useState(() =>
     getTimeRemaining(new Date(birthdayConfig.birthdayDate)),
   );
-  const [celebrating, setCelebrating] = useState(true);
-  const [showButton, setShowButton] = useState(true);
+  const [celebrating, setCelebrating] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     if (time.done) return;
