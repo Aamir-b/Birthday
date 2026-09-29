@@ -1,42 +1,48 @@
-import { motion } from 'framer-motion';
-import { birthdayConfig } from '@/config/birthdayConfig';
-import FloatingPetals from '@/components/effects/FloatingPetals';
-import Sparkles from '@/components/effects/Sparkles';
-import GlowButton from '@/components/ui/GlowButton';
-import type { BirthdayPhoto } from '@/config/birthdayConfig';
+import { motion } from "framer-motion";
+import { birthdayConfig } from "@/config/birthdayConfig";
+import FloatingPetals from "@/components/effects/FloatingPetals";
+import Sparkles from "@/components/effects/Sparkles";
+import GlowButton from "@/components/ui/GlowButton";
+import type { BirthdayPhoto } from "@/config/birthdayConfig";
 
 interface PhotoGalleryProps {
   onNext: () => void;
 }
 
 const layouts = [
-  'polaroid',
-  'floating',
-  'card3d',
-  'cinematic',
-  'glow',
-  'polaroid',
-  'card3d',
-  'floating',
-  'cinematic',
-  'glow',
-  'polaroid',
-  'card3d',
-  'floating',
-  'cinematic',
-  'glow',
-  'polaroid',
-  'card3d',
-  'floating',
-  'cinematic',
-  'glow',
-  'polaroid',
-  'card3d',
-  'floating',
-  'cinematic',
+  "polaroid",
+  "floating",
+  "card3d",
+  "cinematic",
+  "glow",
+  "polaroid",
+  "card3d",
+  "floating",
+  "cinematic",
+  "glow",
+  "polaroid",
+  "card3d",
+  "floating",
+  "cinematic",
+  "glow",
+  "polaroid",
+  "card3d",
+  "floating",
+  "cinematic",
+  "glow",
+  "polaroid",
+  "card3d",
+  "floating",
+  "cinematic",
 ];
 
-function GalleryMedia({ photo, className }: { photo: BirthdayPhoto; className: string }) {
+function GalleryMedia({
+  photo,
+  className,
+}: {
+  photo: BirthdayPhoto;
+  className: string;
+}) {
   if (photo.video) {
     return (
       <video
@@ -50,7 +56,14 @@ function GalleryMedia({ photo, className }: { photo: BirthdayPhoto; className: s
     );
   }
 
-  return <img src={photo.image} alt={photo.caption} loading="lazy" className={className} />;
+  return (
+    <img
+      src={photo.image}
+      alt={photo.caption}
+      loading="lazy"
+      className={className}
+    />
+  );
 }
 
 export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
@@ -93,7 +106,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
         {birthdayConfig.photos.map((photo, i) => {
           const layout = layouts[i % layouts.length];
 
-          if (layout === 'cinematic') {
+          if (layout === "cinematic") {
             return (
               <motion.div
                 key={i}
@@ -104,7 +117,10 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 className="break-inside-avoid mb-4 sm:mb-5 w-full"
               >
                 <div className="relative rounded-2xl overflow-hidden photo-frame">
-                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
+                  <GalleryMedia
+                    photo={photo}
+                    className="w-full h-auto object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   <p className="absolute bottom-3 left-3 right-3 font-dancing text-base sm:text-lg text-pink-100 text-glow-soft text-left">
                     {photo.caption}
@@ -114,24 +130,29 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
             );
           }
 
-          if (layout === 'polaroid') {
+          if (layout === "polaroid") {
             return (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 40, rotate: i % 2 === 0 ? -3 : 3 }}
                 whileInView={{ opacity: 1, y: 0, rotate: i % 2 === 0 ? -2 : 2 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.8, type: 'spring', bounce: 0.3 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
                 whileHover={{ scale: 1.03, rotate: 0 }}
                 className="break-inside-avoid mb-4 sm:mb-5 polaroid rounded-sm"
               >
-                <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
-                <p className="mt-3 font-dancing text-base sm:text-lg text-gray-700 text-center">{photo.caption}</p>
+                <GalleryMedia
+                  photo={photo}
+                  className="w-full h-auto object-cover"
+                />
+                <p className="mt-3 font-dancing text-base sm:text-lg text-gray-700 text-center">
+                  {photo.caption}
+                </p>
               </motion.div>
             );
           }
 
-          if (layout === 'card3d') {
+          if (layout === "card3d") {
             return (
               <motion.div
                 key={i}
@@ -142,16 +163,21 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 className="break-inside-avoid mb-4 sm:mb-5 perspective-1000"
               >
                 <div className="card-3d glass-card rounded-2xl overflow-hidden">
-                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
+                  <GalleryMedia
+                    photo={photo}
+                    className="w-full h-auto object-cover"
+                  />
                   <div className="p-3">
-                    <p className="font-dancing text-base sm:text-lg text-pink-100 text-center">{photo.caption}</p>
+                    <p className="font-dancing text-base sm:text-lg text-pink-100 text-center">
+                      {photo.caption}
+                    </p>
                   </div>
                 </div>
               </motion.div>
             );
           }
 
-          if (layout === 'glow') {
+          if (layout === "glow") {
             return (
               <motion.div
                 key={i}
@@ -161,11 +187,19 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 transition={{ duration: 0.8 }}
                 className="break-inside-avoid mb-4 sm:mb-5"
               >
-                <div className="relative rounded-2xl overflow-hidden glow-pulse" style={{ border: '2px solid rgba(255,107,157,0.3)' }}>
-                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
+                <div
+                  className="relative rounded-2xl overflow-hidden glow-pulse"
+                  style={{ border: "2px solid rgba(255,107,157,0.3)" }}
+                >
+                  <GalleryMedia
+                    photo={photo}
+                    className="w-full h-auto object-cover"
+                  />
                   <div className="absolute inset-0 ring-1 ring-pink-400/20 rounded-2xl pointer-events-none" />
                 </div>
-                <p className="mt-2 font-dancing text-sm sm:text-base text-pink-200/70 text-center">{photo.caption}</p>
+                <p className="mt-2 font-dancing text-sm sm:text-base text-pink-200/70 text-center">
+                  {photo.caption}
+                </p>
               </motion.div>
             );
           }
@@ -180,10 +214,22 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
               transition={{ duration: 0.8 }}
               className="break-inside-avoid mb-4 sm:mb-5"
             >
-              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}>
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 4 + (i % 3),
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
                 <div className="glass-card rounded-xl overflow-hidden">
-                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
-                  <p className="p-3 font-dancing text-base sm:text-lg text-pink-100 text-center">{photo.caption}</p>
+                  <GalleryMedia
+                    photo={photo}
+                    className="w-full h-auto object-cover"
+                  />
+                  <p className="p-3 font-dancing text-base sm:text-lg text-pink-100 text-center">
+                    {photo.caption}
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
@@ -192,9 +238,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
       </div>
 
       <div className="relative z-10 flex flex-col items-center mt-12">
-        <GlowButton onClick={onNext}>
-          What Makes You Special? ❤️
-        </GlowButton>
+        <GlowButton onClick={onNext}>What Makes You Special? ❤️</GlowButton>
       </div>
     </div>
   );

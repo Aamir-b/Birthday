@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
-import { birthdayConfig } from '@/config/birthdayConfig';
-import StarField from '@/components/effects/StarField';
-import Sparkles from '@/components/effects/Sparkles';
-import Confetti from '@/components/effects/Confetti';
-import Balloons from '@/components/effects/Balloons';
-import FloatingPetals from '@/components/effects/FloatingPetals';
-import GlowButton from '@/components/ui/GlowButton';
+import { motion } from "framer-motion";
+import { birthdayConfig } from "@/config/birthdayConfig";
+import StarField from "@/components/effects/StarField";
+import Sparkles from "@/components/effects/Sparkles";
+import Confetti from "@/components/effects/Confetti";
+import Balloons from "@/components/effects/Balloons";
+import FloatingPetals from "@/components/effects/FloatingPetals";
+import GlowButton from "@/components/ui/GlowButton";
 
 interface GrandRevealProps {
   onNext: () => void;
@@ -38,10 +38,12 @@ export default function GrandRevealPage({ onNext }: GrandRevealProps) {
         <motion.h1
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5, type: 'spring' }}
+          transition={{ duration: 1, delay: 0.5, type: "spring" }}
           className="font-dancing text-4xl sm:text-6xl md:text-7xl mb-4 text-glow-pink"
         >
-          <span className="pink-gradient-text">{birthdayConfig.revealHeading}</span>
+          <span className="pink-gradient-text">
+            {birthdayConfig.revealHeading}
+          </span>
         </motion.h1>
 
         <motion.p
@@ -56,7 +58,12 @@ export default function GrandRevealPage({ onNext }: GrandRevealProps) {
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 1.5, type: 'spring', bounce: 0.4 }}
+          transition={{
+            duration: 1.2,
+            delay: 1.5,
+            type: "spring",
+            bounce: 0.4,
+          }}
           className="my-6 w-full px-3"
         >
           <h2 className="font-dancing font-bold text-6xl sm:text-7xl md:text-8xl text-pink-100 text-glow-pink leading-tight">
@@ -87,9 +94,7 @@ export default function GrandRevealPage({ onNext }: GrandRevealProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 3 }}
         >
-          <GlowButton onClick={onNext}>
-            Continue Your Surprise ✨
-          </GlowButton>
+          <GlowButton onClick={onNext}>Continue Your Surprise ✨</GlowButton>
         </motion.div>
       </motion.div>
     </div>
