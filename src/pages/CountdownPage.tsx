@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { birthdayConfig } from '@/config/birthdayConfig';
-import StarField from '@/components/effects/StarField';
-import Sparkles from '@/components/effects/Sparkles';
-import GlowButton from '@/components/ui/GlowButton';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { birthdayConfig } from "@/config/birthdayConfig";
+import StarField from "@/components/effects/StarField";
+import Sparkles from "@/components/effects/Sparkles";
+import GlowButton from "@/components/ui/GlowButton";
 
 interface CountdownProps {
   onReveal: () => void;
@@ -11,7 +11,8 @@ interface CountdownProps {
 
 function getTimeRemaining(target: Date) {
   const diff = target.getTime() - Date.now();
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, done: true };
+  if (diff <= 0)
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, done: true };
   return {
     days: Math.floor(diff / 86400000),
     hours: Math.floor((diff / 3600000) % 24),
@@ -22,9 +23,11 @@ function getTimeRemaining(target: Date) {
 }
 
 export default function CountdownPage({ onReveal }: CountdownProps) {
-  const [time, setTime] = useState(() => getTimeRemaining(new Date(birthdayConfig.birthdayDate)));
-  const [celebrating, setCelebrating] = useState(false);
-  const [showButton, setShowButton] = useState(false);
+  const [time, setTime] = useState(() =>
+    getTimeRemaining(new Date(birthdayConfig.birthdayDate)),
+  );
+  const [celebrating, setCelebrating] = useState(true);
+  const [showButton, setShowButton] = useState(true);
 
   useEffect(() => {
     if (time.done) return;
@@ -41,10 +44,10 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
   }, [time.done]);
 
   const units = [
-    { label: 'DAYS', value: time.days },
-    { label: 'HOURS', value: time.hours },
-    { label: 'MINUTES', value: time.minutes },
-    { label: 'SECONDS', value: time.seconds },
+    { label: "DAYS", value: time.days },
+    { label: "HOURS", value: time.hours },
+    { label: "MINUTES", value: time.minutes },
+    { label: "SECONDS", value: time.seconds },
   ];
 
   return (
@@ -94,10 +97,12 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
                       transition={{ duration: 0.3 }}
                       className="font-serif-elegant text-2xl sm:text-3xl md:text-4xl font-semibold text-white text-glow-soft text-center tabular-nums"
                     >
-                      {String(u.value).padStart(2, '0')}
+                      {String(u.value).padStart(2, "0")}
                     </motion.div>
                   </div>
-                  <span className="mt-2 text-[9px] sm:text-xs tracking-widest text-pink-300/60 font-medium">{u.label}</span>
+                  <span className="mt-2 text-[9px] sm:text-xs tracking-widest text-pink-300/60 font-medium">
+                    {u.label}
+                  </span>
                 </div>
               ))}
             </motion.div>
@@ -131,11 +136,20 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
             <motion.div
               initial={{ scale: 0, rotate: -20 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1, type: 'spring', bounce: 0.5 }}
+              transition={{ duration: 1, type: "spring", bounce: 0.5 }}
               className="mb-8"
             >
-              <svg viewBox="0 0 24 24" className="w-24 h-24 sm:w-32 sm:h-32" style={{ filter: 'drop-shadow(0 0 30px rgba(255,107,157,0.8))' }}>
-                <path d="M12 21s-6.5-4.35-9.5-8.5C0.5 9.5 2 5.5 5.5 5.5c2 0 3.5 1.5 6.5 4.5 3-3 4.5-4.5 6.5-4.5 3.5 0 5 4 3 7-3 4.15-9.5 8.5-9.5 8.5z" fill="url(#bigHeart)" />
+              <svg
+                viewBox="0 0 24 24"
+                className="w-24 h-24 sm:w-32 sm:h-32"
+                style={{
+                  filter: "drop-shadow(0 0 30px rgba(255,107,157,0.8))",
+                }}
+              >
+                <path
+                  d="M12 21s-6.5-4.35-9.5-8.5C0.5 9.5 2 5.5 5.5 5.5c2 0 3.5 1.5 6.5 4.5 3-3 4.5-4.5 6.5-4.5 3.5 0 5 4 3 7-3 4.15-9.5 8.5-9.5 8.5z"
+                  fill="url(#bigHeart)"
+                />
                 <defs>
                   <linearGradient id="bigHeart" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#ff6b9d" />
@@ -150,7 +164,7 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
             <motion.h1
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3, type: 'spring' }}
+              transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
               className="font-dancing text-4xl sm:text-6xl md:text-7xl text-glow-pink mb-8"
             >
               <span className="pink-gradient-text">IT'S YOUR DAY! 🎉❤️</span>
@@ -165,7 +179,10 @@ export default function CountdownPage({ onReveal }: CountdownProps) {
                 <p className="font-serif-elegant text-lg sm:text-xl text-pink-200/80 mb-6 text-glow-soft">
                   ✨ Open Your Birthday Surprise ✨
                 </p>
-                <GlowButton onClick={onReveal} className="glow-pulse text-lg sm:text-xl">
+                <GlowButton
+                  onClick={onReveal}
+                  className="glow-pulse text-lg sm:text-xl"
+                >
                   Open My Surprise ❤️
                 </GlowButton>
               </motion.div>

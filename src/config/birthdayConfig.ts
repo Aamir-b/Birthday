@@ -1,6 +1,7 @@
 export interface BirthdayPhoto {
   image: string;
   caption: string;
+  video?: boolean;
 }
 
 export interface Quality {
@@ -12,8 +13,20 @@ export type Wish = string;
 export type Dream = string;
 export type Compliment = string;
 
+const attachmentUrls = import.meta.glob('../attachments/*.{jpg,jpeg,png,mp4}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+
+const attachment = (filename: string) => {
+  const url = attachmentUrls[`../attachments/${filename}`];
+  if (!url) throw new Error(`Missing birthday attachment: ${filename}`);
+  return url;
+};
+
 export const birthdayConfig = {
-  herName: "My Beautiful Girl",
+  herName: "Aaisu ❤️",
   myName: "Your Love",
 
   // Set the birthday date and exact time here (24-hour format)
@@ -138,58 +151,91 @@ export const birthdayConfig = {
     "You are loved.",
     "And you deserve every beautiful thing this world has to offer.",
   ],
-  finalBirthdayText: "Happy Birthday, My Beautiful Girl. ❤️",
+  finalBirthdayText: "Happy Birthday, Aaisu. ❤️",
   finalClosingLines: ["Keep smiling.", "Keep shining.", "Keep being YOU. ✨"],
   finalGoodbye: "Have the most beautiful birthday ever. 🎂❤️",
 
   celebrationText: "Happy Birthday ❤️",
+  celebrationName: "My love, my kuchu puchu 🥰💖",
   celebrationSubText: "✨ You deserve a magical day. ✨",
 
   musicPath: "/music/birthday-song.mp3",
 
   photos: [
-    { image: "https://images.pexels.com/photos/18355488/pexels-photo-18355488.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "That beautiful smile ❤️" },
-    { image: "https://images.pexels.com/photos/1310461/pexels-photo-1310461.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Absolutely gorgeous ✨" },
-    { image: "https://images.pexels.com/photos/5920763/pexels-photo-5920763.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Simply beautiful 🥹" },
-    { image: "https://images.pexels.com/photos/719617/pexels-photo-719617.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "That look. ❤️" },
-    { image: "https://images.pexels.com/photos/7082205/pexels-photo-7082205.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "My favorite smile." },
-    { image: "https://images.pexels.com/photos/11929000/pexels-photo-11929000.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Simply stunning." },
-    { image: "https://images.pexels.com/photos/13140394/pexels-photo-13140394.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Beautiful from every angle." },
-    { image: "https://images.pexels.com/photos/18392646/pexels-photo-18392646.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "How are you this beautiful? 🥹" },
-    { image: "https://images.pexels.com/photos/21286432/pexels-photo-21286432.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Pure beauty. 🌸" },
-    { image: "https://images.pexels.com/photos/1890033/pexels-photo-1890033.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "That smile though ❤️" },
-    { image: "https://images.pexels.com/photos/10055420/pexels-photo-10055420.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Radiant as always ✨" },
-    { image: "https://images.pexels.com/photos/31006570/pexels-photo-31006570.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Adorable. 🌸" },
-    { image: "https://images.pexels.com/photos/2520446/pexels-photo-2520446.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Sunshine in human form. ☀️" },
-    { image: "https://images.pexels.com/photos/2616957/pexels-photo-2616957.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Beautiful inside and out. ❤️" },
-    { image: "https://images.pexels.com/photos/38956548/pexels-photo-38956548.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "That joy on your face 🥹" },
-    { image: "https://images.pexels.com/photos/30473344/pexels-photo-30473344.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Effortlessly beautiful ✨" },
-    { image: "https://images.pexels.com/photos/6418009/pexels-photo-6418009.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "A whole vibe. 😍" },
-    { image: "https://images.pexels.com/photos/27408698/pexels-photo-27408698.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Confidence looks good on you. ✨" },
-    { image: "https://images.pexels.com/photos/36093241/pexels-photo-36093241.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Absolutely glowing. 🌟" },
-    { image: "https://images.pexels.com/photos/10970135/pexels-photo-10970135.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Cutest smile ever. 🥹" },
-    { image: "https://images.pexels.com/photos/936069/pexels-photo-936069.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Playful and beautiful. 🌸" },
-    { image: "https://images.pexels.com/photos/7707368/pexels-photo-7707368.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "That warmth in your eyes ❤️" },
-    { image: "https://images.pexels.com/photos/3757027/pexels-photo-3757027.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Music to my eyes. 🎶" },
-    { image: "https://images.pexels.com/photos/39178016/pexels-photo-39178016.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", caption: "Blooming beautiful. 🌸" },
+    { image: attachment('1000250709.jpg'), caption: 'Flowers for you, moments for us 🌸' },
+    { image: attachment('1000250716.jpg'), caption: 'Hand in hand beneath the lights ❤️' },
+    { image: attachment('1000250717.jpg'), caption: 'A sweet smile in the garden 😊' },
+    { image: attachment('1000250718.jpg'), caption: 'Pink sleeves and a mirror smile 💗' },
+    { image: attachment('1000250719.jpg'), caption: 'Your rosy little mirror moment 🌷' },
+    { image: attachment('1000250720.jpg'), caption: 'Elegance dressed in white ✨' },
+    { image: attachment('1000250721.jpg'), caption: 'Classic black and cream 🖤' },
+    { image: attachment('1000250722.jpg'), caption: 'Your relaxed café pose ☕' },
+    { image: attachment('1000250723.jpg'), caption: 'Blue blooms and your lovely pose 💙' },
+    { image: attachment('1000250725.jpg'), caption: 'Those eyes framed in blue 👀' },
+    { image: attachment('1000250726.png'), caption: 'Peachy and picture-perfect 🍑' },
+    { image: attachment('1000250727.jpg'), caption: 'A little sparkle in white ✨' },
+    { image: attachment('1000250728.jpg'), caption: 'A little daydream at the café ☕' },
+    { image: attachment('1000250729.png'), caption: 'The flowers found their favorite person 🌼' },
+    { image: attachment('1000250730.jpg'), caption: 'Cozy in blue beneath the garden lights 💙' },
+    { image: attachment('1000250731.jpg'), caption: 'A closer look at that lovely smile ❤️' },
+    { image: attachment('1000250732.jpg'), caption: 'A thoughtful moment together 🌸' },
+    { image: attachment('1000250733.jpg'), caption: 'A graceful look among the greenery 🌿' },
+    { image: attachment('1000250734.jpg'), caption: 'A full-length mirror moment ✨' },
+    { image: attachment('1000250755.jpg'), caption: 'An evening in teal 💚' },
+    { image: attachment('1000250756.jpg'), caption: 'Olive stripes and a mirror smile 😊' },
+    { image: attachment('1000250757.jpg'), caption: 'A soft smile in white 🤍' },
+    { image: attachment('1000250758.jpg'), caption: 'A quiet moment in white 🌙' },
+    { image: attachment('1000250759.jpg'), caption: 'That gentle sideways smile 🥰' },
+    { image: attachment('1000250760.jpg'), caption: 'A close-up wrapped in color 🌺' },
+    { image: attachment('1000250761.jpg'), caption: 'A kiss blown just for the camera 💋' },
+    { image: attachment('1000250762.jpg'), caption: 'Soft white, effortless grace 🤍' },
+    { image: attachment('1000250764.jpg'), caption: 'Blue patterns and beautiful henna 💙' },
+    { image: attachment('1000250879.jpg'), caption: 'Flowers and a hand held close 🌹' },
+    { image: attachment('1000250880.jpg'), caption: 'Our anniversary table, our moment ❤️' },
+    { image: attachment('1000250881.jpg'), caption: 'A bouquet in the pink swing 🌸' },
+    { image: attachment('1000250882.jpg'), caption: 'A rose to remember our anniversary 🌹' },
+    { image: attachment('1000250883.jpg'), caption: 'A quiet look beside the greenery 🌿' },
+    { image: attachment('1000250884.jpg'), caption: 'A soft smile, hands folded 🥰' },
+    { image: attachment('1000250885.jpg'), caption: 'One lovely smile, one peaceful pose ✨' },
+    { image: attachment('1000250886.jpg'), caption: 'A sunny little close-up ☀️' },
+    { image: attachment('1000250887.jpg'), caption: 'That sunshine-yellow smile 💛' },
+    { image: attachment('1000250888.jpg'), caption: 'A bouquet and a staircase moment 💐' },
+    { image: attachment('1000250889.jpg'), caption: 'A floral look beneath the lights 🌺' },
+    { image: attachment('1000250890.jpg'), caption: 'A bouquet on a moonlit walk 🌙' },
+    { image: attachment('1000250891.jpg'), caption: 'One of my favorite moments together ❤️' },
+    { image: attachment('1000250892.jpg'), caption: 'Red, florals, and a confident pose 🌹' },
+    { image: attachment('1000250893.jpg'), caption: 'Pretty in pink under the evening lights 💗' },
+    { image: attachment('1000250895.jpg'), caption: 'A graceful moment in white 🤍' },
+    { image: attachment('1000250897.png'), caption: 'A little more of your lovely floral look 🌸' },
+    { image: attachment('1000252154.jpg'), caption: 'Those eyes and that lavender smile 💜' },
+    { image: attachment('1000252155.jpg'), caption: 'A peaceful pose in the garden 🌿' },
+    { image: attachment('1000252160.jpg'), caption: 'A bridal mirror moment, dressed in flowers 💐' },
+    { image: attachment('1000252162.jpg'), caption: 'Four playful sides of your blue look 💙' },
+    { image: attachment('1000252164.jpg'), caption: 'A car-ride selfie with a bow-filter smile 🎀' },
+    { image: attachment('1000252165.jpg'), caption: 'A favorite candid memory ❤️' },
+    { image: attachment('1000252166.jpg'), caption: 'A little moment that feels like you ✨' },
+    { image: attachment('1000252169.jpg'), caption: 'One more lovely memory 🥰' },
+    { image: attachment('1000252161.mp4'), caption: 'Your bridal glow, henna, and bangles ✨', video: true },
+    { image: attachment('1000252167.mp4'), caption: 'That playful pout in black 🖤', video: true },
+    { image: attachment('1000252168.mp4'), caption: 'A little night-time selfie together 🌙', video: true },
   ] as BirthdayPhoto[],
 
   // Special photos used in reveal and gift sections
-  heroPhoto: "https://images.pexels.com/photos/10658354/pexels-photo-10658354.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-  beautifulGirlPhoto: "https://images.pexels.com/photos/18355488/pexels-photo-18355488.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-  giftPhoto: "https://images.pexels.com/photos/719617/pexels-photo-719617.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-  finalPhoto: "https://images.pexels.com/photos/1310461/pexels-photo-1310461.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+  heroPhoto: attachment('1000250726.png'),
+  beautifulGirlPhoto: attachment('1000250723.jpg'),
+  giftPhoto: attachment('1000250882.jpg'),
+  finalPhoto: attachment('1000252154.jpg'),
 
   // Beauty parade carousel photos (reuse from gallery)
   beautyParadePhotos: [
-    "https://images.pexels.com/photos/18355488/pexels-photo-18355488.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/719617/pexels-photo-719617.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/1310461/pexels-photo-1310461.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/21286432/pexels-photo-21286432.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/11929000/pexels-photo-11929000.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/18392646/pexels-photo-18392646.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/1890033/pexels-photo-1890033.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/2520446/pexels-photo-2520446.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    attachment('1000250709.jpg'),
+    attachment('1000250723.jpg'),
+    attachment('1000250725.jpg'),
+    attachment('1000250726.png'),
+    attachment('1000250755.jpg'),
+    attachment('1000250882.jpg'),
+    attachment('1000250892.jpg'),
+    attachment('1000252154.jpg'),
   ] as string[],
 
   enableMusic: true,

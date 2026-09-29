@@ -57,9 +57,9 @@ export default function GrandRevealPage({ onNext }: GrandRevealProps) {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, delay: 1.5, type: 'spring', bounce: 0.4 }}
-          className="my-6"
+          className="my-6 w-full px-3"
         >
-          <h2 className="font-script text-5xl sm:text-7xl md:text-8xl pink-gradient-text text-glow-pink leading-tight">
+          <h2 className="font-dancing font-bold text-6xl sm:text-7xl md:text-8xl text-pink-100 text-glow-pink leading-tight">
             {birthdayConfig.herName}
           </h2>
         </motion.div>

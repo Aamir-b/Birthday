@@ -3,6 +3,7 @@ import { birthdayConfig } from '@/config/birthdayConfig';
 import FloatingPetals from '@/components/effects/FloatingPetals';
 import Sparkles from '@/components/effects/Sparkles';
 import GlowButton from '@/components/ui/GlowButton';
+import type { BirthdayPhoto } from '@/config/birthdayConfig';
 
 interface PhotoGalleryProps {
   onNext: () => void;
@@ -34,6 +35,23 @@ const layouts = [
   'floating',
   'cinematic',
 ];
+
+function GalleryMedia({ photo, className }: { photo: BirthdayPhoto; className: string }) {
+  if (photo.video) {
+    return (
+      <video
+        src={photo.image}
+        controls
+        playsInline
+        preload="metadata"
+        aria-label={photo.caption}
+        className={className}
+      />
+    );
+  }
+
+  return <img src={photo.image} alt={photo.caption} loading="lazy" className={className} />;
+}
 
 export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
   return (
@@ -86,7 +104,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 className="break-inside-avoid mb-4 sm:mb-5 w-full"
               >
                 <div className="relative rounded-2xl overflow-hidden photo-frame">
-                  <img src={photo.image} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover" />
+                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   <p className="absolute bottom-3 left-3 right-3 font-dancing text-base sm:text-lg text-pink-100 text-glow-soft text-left">
                     {photo.caption}
@@ -107,7 +125,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 whileHover={{ scale: 1.03, rotate: 0 }}
                 className="break-inside-avoid mb-4 sm:mb-5 polaroid rounded-sm"
               >
-                <img src={photo.image} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover" />
+                <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
                 <p className="mt-3 font-dancing text-base sm:text-lg text-gray-700 text-center">{photo.caption}</p>
               </motion.div>
             );
@@ -124,7 +142,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 className="break-inside-avoid mb-4 sm:mb-5 perspective-1000"
               >
                 <div className="card-3d glass-card rounded-2xl overflow-hidden">
-                  <img src={photo.image} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover" />
+                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
                   <div className="p-3">
                     <p className="font-dancing text-base sm:text-lg text-pink-100 text-center">{photo.caption}</p>
                   </div>
@@ -144,7 +162,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
                 className="break-inside-avoid mb-4 sm:mb-5"
               >
                 <div className="relative rounded-2xl overflow-hidden glow-pulse" style={{ border: '2px solid rgba(255,107,157,0.3)' }}>
-                  <img src={photo.image} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover" />
+                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
                   <div className="absolute inset-0 ring-1 ring-pink-400/20 rounded-2xl pointer-events-none" />
                 </div>
                 <p className="mt-2 font-dancing text-sm sm:text-base text-pink-200/70 text-center">{photo.caption}</p>
@@ -164,7 +182,7 @@ export default function PhotoGalleryPage({ onNext }: PhotoGalleryProps) {
             >
               <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}>
                 <div className="glass-card rounded-xl overflow-hidden">
-                  <img src={photo.image} alt={photo.caption} loading="lazy" className="w-full h-auto object-cover" />
+                  <GalleryMedia photo={photo} className="w-full h-auto object-cover" />
                   <p className="p-3 font-dancing text-base sm:text-lg text-pink-100 text-center">{photo.caption}</p>
                 </div>
               </motion.div>
