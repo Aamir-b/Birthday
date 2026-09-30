@@ -23,14 +23,18 @@ function getTimeRemaining(target: Date) {
 }
 
 export default function CountdownPage({ onReveal }: CountdownProps) {
-  const [time, setTime] = useState(() =>
-    getTimeRemaining(new Date(birthdayConfig.birthdayDate)),
-  );
-  const [celebrating, setCelebrating] = useState(false);
-  const [showButton, setShowButton] = useState(false);
+  const initialTime = getTimeRemaining(new Date(birthdayConfig.birthdayDate));
+  const [time, setTime] = useState(initialTime);
+  const [celebrating, setCelebrating] = useState(initialTime.done);
+  const [showButton, setShowButton] = useState(initialTime.done);
 
   useEffect(() => {
-    if (time.done) return;
+    if (time.done) {
+      setCelebrating(true);
+      const timer = setTimeout(() => setShowButton(true), 3500);
+      return () => clearTimeout(timer);
+    }
+
     const interval = setInterval(() => {
       const t = getTimeRemaining(new Date(birthdayConfig.birthdayDate));
       setTime(t);
