@@ -31,7 +31,7 @@ export const birthdayConfig = {
 
   // Set the birthday date and exact time here (24-hour format)
   // Format: "YYYY-MM-DDTHH:MM:SS"
-  birthdayDate: "2026-10-01T01:55:00",
+  birthdayDate: "2026-10-02T00:00:00",
 
   heroMessage: "Something Special Is Waiting For You... ❤️",
   heroSubMessage: "For the most beautiful girl in the world",
